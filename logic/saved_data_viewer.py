@@ -31,7 +31,7 @@ class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
             print(e)
 
     def load_data(self, database_location):
-        input_date = self.date_input.date()
+        input_date = self.date_input.date().toString("dd/MM/yyyy")
 
         rows = []
         with open(database_location, "r") as file:
@@ -40,12 +40,10 @@ class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
             fields = next(reader)
             # Extract data in each row
             for row in reader:
-                rows.append(row)
+                if row[-1] == input_date:
+                    rows.append(row)
 
             print(f"Total rows: {reader.line_num}")
-
-        print(f"Field Names: {fields}")
-        print(rows)
 
         num_cols = len(fields)
         num_rows = len(rows)
@@ -60,7 +58,4 @@ class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
             for col in range(num_cols):
                 print(f"Col {col}")
                 self.data_table.setItem(row, col, QtWidgets.QTableWidgetItem(rows[row][col]))
-                # self.data_table.setItem(row, col, QtWidgets.QTableWidgetItem("Wololo"))
-
-                print(rows[row][col], type(rows[row][col]), end=",")
 
