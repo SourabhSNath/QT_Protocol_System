@@ -99,6 +99,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
         date_today = get_date()
 
+        data_header = ["Terminal Name", "IP Address", "Port Name", "Port Number", "Packet Size", "Protocol", "Frame", "Date"]
         data = [terminal_name, ip_address, port_name, port_number, packet_size, protocol, frame, date_today]
         error_list = []
         if not terminal_name:
@@ -124,9 +125,13 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         else:
             root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             database_location = root_dir + "/data/storage/ethernet_data.csv"
-            csv_data = [[data]]
+            csv_data = [data]
             with open(database_location, "a+") as file:
                 writer = csv.writer(file)
+                # Write header only if the file is empty.
+                is_empty_file = os.stat(database_location).st_size == 0
+                if is_empty_file:
+                    writer.writerow(header for header in data_header)
                 writer.writerows(csv_data)
 
     # Opens a different window to view the saved data
