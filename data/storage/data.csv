@@ -1,0 +1,3 @@
+Terminal Name,Port Name,Port Number,Baud Rate,Data Bits,Parity Bits,Frame,Date
+A1,C1,211,110,8,No Parity,12##,16/02/2022
+A2,C2,211,110,8,No Parity,12##$,16/02/2022

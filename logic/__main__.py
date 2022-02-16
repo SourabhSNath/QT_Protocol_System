@@ -32,19 +32,21 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         parity_bit = self.parity_combobox.currentText()
         frame = self.frame_input.text()
 
-        date_today = date.today()
+        date_today = get_date()
 
         data = [terminal_name, port_name, port_number, baud_rate, data_bit, parity_bit, frame, date_today]
+        data_header = ["Terminal Name", "Port Name", "Port Number", "Baud Rate", "Data Bits", "Parity Bits", "Frame",
+                       "Date"]
 
         error_list = []
         if not terminal_name:
-            error_list.append("Terminal Name")
+            error_list.append(data_header[0])
         if not port_name:
-            error_list.append("Port Name")
+            error_list.append(data_header[1])
         if not port_number:
-            error_list.append("Port Number")
+            error_list.append(data_header[2])
         if not frame:
-            error_list.append("Frame")
+            error_list.append(data_header[7])
 
         print(error_list)
 
@@ -59,9 +61,14 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         else:
             root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             database_location = root_dir + "/data/storage/data.csv"
-            csv_data = [[data]]
+            csv_data = [data]
             with open(database_location, "a+") as file:
                 writer = csv.writer(file)
+
+                # Write header only if the file is empty.
+                is_empty_file = os.stat(database_location).st_size == 0
+                if is_empty_file:
+                    writer.writerow(header for header in data_header)
                 writer.writerows(csv_data)
 
             # print(root_dir+"/data/storage/data.json")
@@ -90,7 +97,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         protocol = self.protocol_combobox.currentText()
         frame = self.frame_input_2.text()
 
-        date_today = date.today()
+        date_today = get_date()
 
         data = [terminal_name, ip_address, port_name, port_number, packet_size, protocol, frame, date_today]
         error_list = []
@@ -124,11 +131,16 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
     # Opens a different window to view the saved data
     def open_saved_data_viewer(self):
-        dialog = QtWidgets.QDialog(self)
-        data_viewer = SavedDataViewer()
-        data_viewer.setupUi(dialog)
+        self.saved_data_window = SavedDataViewer()
+        self.saved_data_window.show()
+        # widget = QtWidgets.QWidget()
+        # data_viewer = SavedDataViewer()
+        # data_viewer.setupUi(widget)
         # data_viewer.show()
-        data_viewer.exec()
+
+
+def get_date():
+    return date.today().strftime("%d/%m/%Y")
 
 
 if __name__ == "__main__":
