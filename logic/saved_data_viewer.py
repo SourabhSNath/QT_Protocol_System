@@ -29,6 +29,10 @@ class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
                 self.load_data(database_location)
         except FileNotFoundError as e:
             print(e)
+            msg = QtWidgets.QMessageBox()
+            msg.setText("No information found.")
+            msg.setWindowTitle("Error")
+            msg.exec()
 
     def load_data(self, database_location):
         input_date = self.date_input.date().toString("dd/MM/yyyy")
@@ -58,4 +62,3 @@ class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
             for col in range(num_cols):
                 print(f"Col {col}")
                 self.data_table.setItem(row, col, QtWidgets.QTableWidgetItem(rows[row][col]))
-
