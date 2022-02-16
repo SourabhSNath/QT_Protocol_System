@@ -3,6 +3,8 @@ import os
 from datetime import date
 
 from PyQt6 import QtWidgets
+from PyQt6.QtGui import QRegularExpressionValidator
+from PyQt6.QtCore import QRegularExpression
 
 from saved_data_viewer import SavedDataViewer
 from ui import main_form
@@ -14,6 +16,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.setup_baud_rate()
+        self.setup_input_validation()
         self.save_button.clicked.connect(self.save_transmit_form_data)
         self.save_button_2.clicked.connect(self.save_ethernet_form_data)
         self.actionOpenFi.triggered.connect(self.open_saved_data_viewer)
@@ -124,6 +127,18 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
     def open_saved_data_viewer(self):
         self.saved_data_window = SavedDataViewer()
         self.saved_data_window.show()
+
+    def setup_input_validation(self):
+        alphanumeric_validator = QRegularExpressionValidator(QRegularExpression(r"^\w+$"))
+        self.terminal_input.setValidator(alphanumeric_validator)
+        self.terminal_input_2.setValidator(alphanumeric_validator)
+        self.port_name_input.setValidator(alphanumeric_validator)
+        self.port_name_input_2.setValidator(alphanumeric_validator)
+
+        decimal_validator = QRegularExpressionValidator(QRegularExpression(r"[0-9]+"))
+        self.port_number_input.setValidator(decimal_validator)
+        self.port_name_input_2.setValidator(decimal_validator)
+        self.packet_input.setValidator(decimal_validator)
 
 
 def get_date():
