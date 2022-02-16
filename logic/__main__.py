@@ -50,7 +50,6 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
         print(error_list)
 
-        # noinspection SpellCheckingInspection
         if error_list:
             msg = QtWidgets.QMessageBox()
             msg_grammar = "these inputs" if len(error_list) > 1 else "this input"
@@ -71,21 +70,6 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
                     writer.writerow(header for header in data_header)
                 writer.writerows(csv_data)
 
-            # print(root_dir+"/data/storage/data.json")
-            # if os.path.exists(root_dir+"/data/storage/data.json"):
-            #     print("YO")
-            #     with open(root_dir+"/data/storage/data.json", "a+") as file:
-            #         # file.seek(-1, os.SEEK_END) # Not Working
-            #         # file.truncate()
-            #         file.write(",")
-            #         json.dump(data, file)
-            #         # file.write("]")
-            # else:
-            #     print("NO")
-            #     os.makedirs(root_dir+"/data/storage")
-            #     with open(root_dir+"/data/storage/data.json", "w") as file:
-            #         json.dump(data, file)
-
         print(terminal_name, port_name, port_number, baud_rate, data_bit, parity_bit, frame)
 
     def save_ethernet_form_data(self):
@@ -99,7 +83,8 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
         date_today = get_date()
 
-        data_header = ["Terminal Name", "IP Address", "Port Name", "Port Number", "Packet Size", "Protocol", "Frame", "Date"]
+        data_header = ["Terminal Name", "IP Address", "Port Name", "Port Number", "Packet Size", "Protocol", "Frame",
+                       "Date"]
         data = [terminal_name, ip_address, port_name, port_number, packet_size, protocol, frame, date_today]
         error_list = []
         if not terminal_name:
@@ -135,13 +120,10 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
                 writer.writerows(csv_data)
 
     # Opens a different window to view the saved data
+    # noinspection PyAttributeOutsideInit
     def open_saved_data_viewer(self):
         self.saved_data_window = SavedDataViewer()
         self.saved_data_window.show()
-        # widget = QtWidgets.QWidget()
-        # data_viewer = SavedDataViewer()
-        # data_viewer.setupUi(widget)
-        # data_viewer.show()
 
 
 def get_date():
