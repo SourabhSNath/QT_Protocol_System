@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>657</width>
+    <height>498</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Saved Data Viewer</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" columnstretch="2,0,0,0">
+   <item row="0" column="0">
+    <layout class="QFormLayout" name="type_box">
+     <item row="0" column="0">
+      <widget class="QLabel" name="type_label">
+       <property name="text">
+        <string>Type</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="type_comboBox">
+       <item>
+        <property name="text">
+         <string>Transmit Terminal</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ethernet Communication</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="2">
+    <layout class="QFormLayout" name="date_box">
+     <item row="0" column="0">
+      <widget class="QLabel" name="date_label">
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDateEdit" name="date_input"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="search_button">
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="QTableWidget" name="data_tableWidget"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
