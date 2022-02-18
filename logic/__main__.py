@@ -137,6 +137,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
                 print("Saved data")
 
     # Opens a different window to view the saved data
+    # Self required, window doesn't show up without it. Ignore pycharm warning.
     # noinspection PyAttributeOutsideInit
     def open_saved_data_viewer(self):
         self.saved_data_window = SavedDataViewer()
