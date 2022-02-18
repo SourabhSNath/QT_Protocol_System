@@ -156,6 +156,11 @@
               <height>0</height>
              </size>
             </property>
+            <item>
+             <property name="text">
+              <string>110</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -319,12 +324,12 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <layout class="QHBoxLayout" name="terminal_name_box_2">
+         <layout class="QHBoxLayout" name="ethernet_terminal_name_box">
           <property name="rightMargin">
            <number>8</number>
           </property>
           <item>
-           <widget class="QLabel" name="terminal_label_2">
+           <widget class="QLabel" name="ethernet_terminal_label">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -343,7 +348,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="terminal_input_2"/>
+           <widget class="QLineEdit" name="ethernet_terminal_input"/>
           </item>
          </layout>
         </item>
@@ -369,12 +374,12 @@
          </layout>
         </item>
         <item row="1" column="0">
-         <layout class="QHBoxLayout" name="port_box_2">
+         <layout class="QHBoxLayout" name="ethernet_port_box">
           <property name="rightMargin">
            <number>8</number>
           </property>
           <item>
-           <widget class="QLabel" name="por_name_label_2">
+           <widget class="QLabel" name="ethernet_port_name_label">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -393,14 +398,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="port_name_input_2"/>
+           <widget class="QLineEdit" name="ethernet_port_name_input"/>
           </item>
          </layout>
         </item>
         <item row="1" column="1" colspan="2">
-         <layout class="QHBoxLayout" name="port_no_box_2">
+         <layout class="QHBoxLayout" name="ehternet_port_no_box">
           <item>
-           <widget class="QLabel" name="port_number_label_2">
+           <widget class="QLabel" name="ethernet_port_number_label">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -419,7 +424,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="port_number_input_2"/>
+           <widget class="QLineEdit" name="ethernet_port_number_input"/>
           </item>
          </layout>
         </item>
@@ -466,7 +471,7 @@
          </spacer>
         </item>
         <item row="5" column="2">
-         <widget class="QPushButton" name="save_button_2">
+         <widget class="QPushButton" name="save_ethernet_button">
           <property name="minimumSize">
            <size>
             <width>100</width>
@@ -540,9 +545,9 @@
          </layout>
         </item>
         <item row="3" column="0" colspan="3">
-         <layout class="QHBoxLayout" name="frame_box_2">
+         <layout class="QHBoxLayout" name="ehternet_frame_box">
           <item>
-           <widget class="QLabel" name="frame_label_2">
+           <widget class="QLabel" name="ethernet_frame_label">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -561,7 +566,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="frame_input_2"/>
+           <widget class="QLineEdit" name="ethernet_frame_input"/>
           </item>
          </layout>
         </item>

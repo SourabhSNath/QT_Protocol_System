@@ -3,8 +3,8 @@ import os
 from datetime import date
 
 from PyQt6 import QtWidgets
-from PyQt6.QtGui import QRegularExpressionValidator
 from PyQt6.QtCore import QRegularExpression
+from PyQt6.QtGui import QRegularExpressionValidator
 
 from saved_data_viewer import SavedDataViewer
 from ui import main_form
@@ -18,7 +18,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         self.setup_baud_rate()
         self.setup_input_validation()
         self.save_button.clicked.connect(self.save_transmit_form_data)
-        self.save_button_2.clicked.connect(self.save_ethernet_form_data)
+        self.save_ethernet_button.clicked.connect(self.save_ethernet_form_data)
         self.actionOpenFi.triggered.connect(self.open_saved_data_viewer)
 
     def setup_baud_rate(self):
@@ -72,17 +72,18 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
                 if is_empty_file:
                     writer.writerow(header for header in data_header)
                 writer.writerows(csv_data)
+                print("Saved data")
 
         print(terminal_name, port_name, port_number, baud_rate, data_bit, parity_bit, frame)
 
     def save_ethernet_form_data(self):
-        terminal_name = self.terminal_input_2.text()
+        terminal_name = self.ethernet_terminal_input.text()
         ip_address = self.ip_input.text()
-        port_name = self.port_name_input_2.text()
-        port_number = self.port_number_input_2.text()
+        port_name = self.ethernet_port_name_input.text()
+        port_number = self.ethernet_port_number_input.text()
         packet_size = self.packet_input.text()
         protocol = self.protocol_combobox.currentText()
-        frame = self.frame_input_2.text()
+        frame = self.ethernet_frame_input.text()
 
         date_today = get_date()
 
@@ -121,6 +122,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
                 if is_empty_file:
                     writer.writerow(header for header in data_header)
                 writer.writerows(csv_data)
+                print("Saved data")
 
     # Opens a different window to view the saved data
     # noinspection PyAttributeOutsideInit
@@ -131,14 +133,14 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
     def setup_input_validation(self):
         alphanumeric_validator = QRegularExpressionValidator(QRegularExpression(r"^\w+$"))
         self.terminal_input.setValidator(alphanumeric_validator)
-        self.terminal_input_2.setValidator(alphanumeric_validator)
+        self.ethernet_terminal_input.setValidator(alphanumeric_validator)
         self.port_name_input.setValidator(alphanumeric_validator)
-        self.port_name_input_2.setValidator(alphanumeric_validator)
+        self.ethernet_port_name_input.setValidator(alphanumeric_validator)
 
         decimal_validator = QRegularExpressionValidator(QRegularExpression(r"[0-9]+"))
         self.port_number_input.setValidator(decimal_validator)
-        self.port_name_input_2.setValidator(decimal_validator)
         self.packet_input.setValidator(decimal_validator)
+        self.ethernet_port_number_input.setValidator(decimal_validator)
 
 
 def get_date():
