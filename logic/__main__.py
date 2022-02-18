@@ -9,6 +9,10 @@ from PyQt6.QtGui import QRegularExpressionValidator
 from saved_data_viewer import SavedDataViewer
 from ui import main_form
 
+"""
+Main window class. This is what's seen first when the software is opened.
+"""
+
 
 class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
@@ -21,11 +25,15 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         self.save_ethernet_button.clicked.connect(self.save_ethernet_form_data)
         self.actionOpenFi.triggered.connect(self.open_saved_data_viewer)
 
+    # Setting baud rates through code since the numbers aren't known.
+    # For now setting common baud rate numbers.
     def setup_baud_rate(self):
         baud_rates = [110, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600]
+        self.baud_rate_combo_box.clear()  # Clearing the default 110 set in the ui file inorder to prevent 2 copies.
         for rate in baud_rates:
             self.baud_rate_combo_box.addItem(str(rate))
 
+    # Saves the data from the first Transmit Terminal tab.
     def save_transmit_form_data(self):
         terminal_name = self.terminal_input.text()
         port_name = self.port_name_input.text()
@@ -38,9 +46,12 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         date_today = get_date()
 
         data = [terminal_name, port_name, port_number, baud_rate, data_bit, parity_bit, frame, date_today]
+        # Table header names for the data.
         data_header = ["Terminal Name", "Port Name", "Port Number", "Baud Rate", "Data Bits", "Parity Bits", "Frame",
                        "Date"]
 
+        # Gathering all the inputs which were empty to a list, this will be displayed in a message box when the user
+        # tries to save.
         error_list = []
         if not terminal_name:
             error_list.append(data_header[0])
@@ -76,6 +87,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
 
         print(terminal_name, port_name, port_number, baud_rate, data_bit, parity_bit, frame)
 
+    # Saves the data from Ethernet Communication tab.
     def save_ethernet_form_data(self):
         terminal_name = self.ethernet_terminal_input.text()
         ip_address = self.ip_input.text()
@@ -130,6 +142,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         self.saved_data_window = SavedDataViewer()
         self.saved_data_window.show()
 
+    # Set Input Validation to only let the user enter text in certain ways by using regular expression.
     def setup_input_validation(self):
         alphanumeric_validator = QRegularExpressionValidator(QRegularExpression(r"^\w+$"))
         self.terminal_input.setValidator(alphanumeric_validator)
@@ -143,6 +156,7 @@ class MainUI(QtWidgets.QMainWindow, main_form.Ui_MainWindow):
         self.ethernet_port_number_input.setValidator(decimal_validator)
 
 
+# Get today's date in date/month/year format
 def get_date():
     return date.today().strftime("%d/%m/%Y")
 

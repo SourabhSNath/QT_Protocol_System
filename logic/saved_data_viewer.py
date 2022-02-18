@@ -5,6 +5,10 @@ from PyQt6 import QtWidgets, QtCore
 
 from ui import saved_data_window
 
+"""
+Class for the window that shows saved information.
+"""
+
 
 class SavedDataViewer(QtWidgets.QMainWindow, saved_data_window.Ui_MainWindow):
     def __init__(self):
